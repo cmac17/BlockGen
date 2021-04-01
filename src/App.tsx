@@ -1,6 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
-import {Block, blocks} from "./Blocks";
+
+interface Block {
+  image: string,
+  blockName: string,
+  blockId: string
+}
 
 function importAll(r: any) {
   let imageList = {};
@@ -8,15 +13,44 @@ function importAll(r: any) {
   r.keys().map((item) => { imageList[item.replace('./', '')] = r(item); });
   return imageList;
 }
-const test = require.context('./resources/Mizunos 16 Craft JE_1.16.4-1.0/assets/minecraft/textures/block', true, /\.png$/)
-const images = importAll(test);
+
+const imageContext = require.context("../public/Mizunos/assets/minecraft/textures/block", true, /\.png$/)
+const images = importAll(imageContext);
 
 function App() {
-  const [generatedBlocks, setGeneratedBlocks] = useState<Block[]>([
-      blocks[0],
-      blocks[1],
-      blocks[2]
+  const getData = () => {
+    fetch('config.json'
+        ,{
+          headers : {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        }
+    )
+        .then(function(response){
+          console.log(response)
+          return response.json();
+        })
+        .then(function(myJson) {
+          console.log(myJson);
+          setBlockConfig(myJson.blocks)
+          setFlowerConfig(myJson.blocks)
+        });
+  }
+  useEffect(()=>{
+    getData()
+  },[])
+
+  const [blockConfig, setBlockConfig] = useState([
+    {image: "stone.png",            blockName: "Stone",             blockId: "minecraft:stone"},
+    {image: "granite.png",          blockName: "Granite",           blockId: "minecraft:stone"},
+    {image: "polished_granite.png", blockName: "Polished Granite",  blockId: "minecraft:stone"},
   ])
+  const [flowerConfig, setFlowerConfig] = useState([
+    {image: "stone.png",            blockName: "Stone",             blockId: "minecraft:stone"}
+  ])
+  const [generatedBlocks, setGeneratedBlocks] = useState<Block[]>([blockConfig[0], blockConfig[1], blockConfig[2]])
+  const [generatedFlowers, setGeneratedFlowers] = useState<Block[]>([flowerConfig[0]])
 
   function handleClick(event: React.MouseEvent<Element, MouseEvent>) {
     event.preventDefault()
@@ -27,8 +61,7 @@ function App() {
     const blockList: Block[] = [];
     const values: Block[] = []
 
-    // @ts-ignore
-    blocks.map(val => blockList.push(Object.assign({}, val)))
+    blockConfig.map(val => blockList.push(Object.assign({}, val)))
 
     for (let i = 0; i < 3; i++) {
       // @ts-ignore
@@ -84,7 +117,7 @@ function App() {
               <p>{generatedBlocks[2].blockId}</p>
             </div>
           </div>
-        <button className="Generate-button" onClick={handleClick}>Generate new blocks</button>
+        <button className="Generate-button" onClick={handleClick}>Generate new block palette</button>
       </header>
     </div>
   );
