@@ -7,17 +7,34 @@ interface Block {
   blockId: string
 }
 
+interface Flower {
+  image: string,
+  blockName: string,
+  blockId: string
+}
+
+/**
+ * Loads all dependencies from r
+ * @param r RequireContext The context with which to load additional dependencies
+ */
 function importAll(r: any) {
   let imageList = {};
   // @ts-ignore
-  r.keys().map((item) => { imageList[item.replace('./', '')] = r(item); });
+  r.keys().forEach((item) => { imageList[item.replace('./', '')] = r(item); });
   return imageList;
 }
 
+// Load images from public
 const imageContext = require.context("../public/Mizunos/assets/minecraft/textures/block", true, /\.png$/)
 const images = importAll(imageContext);
 
+/**
+ * Component for loading the Palette Generator
+ */
 function App() {
+  /**
+   * Loads the config JSON file for block and flower data
+   */
   const getData = () => {
     fetch('config.json'
         ,{
@@ -28,49 +45,71 @@ function App() {
         }
     )
         .then(function(response){
-          console.log(response)
           return response.json();
         })
         .then(function(myJson) {
-          console.log(myJson);
           setBlockConfig(myJson.blocks)
-          setFlowerConfig(myJson.blocks)
+          setFlowerConfig(myJson.flowers)
         });
   }
+
+  // Effect used to trigger loading block data
   useEffect(()=>{
     getData()
   },[])
 
+  // State to hold the block and flower data from the config JSON
   const [blockConfig, setBlockConfig] = useState([
     {image: "stone.png",            blockName: "Stone",             blockId: "minecraft:stone"},
     {image: "granite.png",          blockName: "Granite",           blockId: "minecraft:stone"},
     {image: "polished_granite.png", blockName: "Polished Granite",  blockId: "minecraft:stone"},
   ])
   const [flowerConfig, setFlowerConfig] = useState([
-    {image: "stone.png",            blockName: "Stone",             blockId: "minecraft:stone"}
+    {image: "poppy.png",            blockName: "Poppy",             blockId: "minecraft:red_flower"}
   ])
-  const [generatedBlocks, setGeneratedBlocks] = useState<Block[]>([blockConfig[0], blockConfig[1], blockConfig[2]])
-  const [generatedFlowers, setGeneratedFlowers] = useState<Block[]>([flowerConfig[0]])
 
+  // State to hold the currently displayed blocks and flower
+  const [generatedBlocks, setGeneratedBlocks] = useState<Block[]>([blockConfig[0], blockConfig[1], blockConfig[2]])
+  const [generatedFlower, setGeneratedFlower] = useState<Block[]>([flowerConfig[0]])
+
+  /**
+   * Click handler for the generate button
+   */
   function handleClick(event: React.MouseEvent<Element, MouseEvent>) {
     event.preventDefault()
     setGeneratedBlocks(determineBlocks())
+    setGeneratedFlower(determineFlower())
   }
 
+  /**
+   * Randomly determines the blocks to display
+   */
   function determineBlocks(): Block[] {
+    // Copy the block config to a local object
     const blockList: Block[] = [];
-    const values: Block[] = []
-
     blockConfig.map(val => blockList.push(Object.assign({}, val)))
 
+    const values: Block[] = []
+
+    // Determine the three blocks to display
     for (let i = 0; i < 3; i++) {
-      // @ts-ignore
       const selectedBlock = Math.floor(Math.random() * blockList.length)
-      // @ts-ignore
       values.push(blockList[selectedBlock])
-      // @ts-ignore
       blockList.splice(selectedBlock, 1)
     }
+
+    return values
+  }
+
+  /**
+   * Randomly determines the flower to display
+   */
+  function determineFlower(): Flower[] {
+    const values: Flower[] = []
+
+    // Determine the flower blocks to display
+    const selectedFlower = Math.floor(Math.random() * flowerConfig.length)
+    values.push(flowerConfig[selectedFlower])
 
     return values
   }
@@ -86,7 +125,7 @@ function App() {
                     // @ts-ignore
                     images[generatedBlocks[0].image].default
                   }
-                  className="App-logo"
+                  className="App-image"
                   alt="logo"
               />
               <p>{generatedBlocks[0].blockName}</p>
@@ -98,7 +137,7 @@ function App() {
                     // @ts-ignore
                     images[generatedBlocks[1].image].default
                   }
-                  className="App-logo"
+                  className="App-image"
                   alt="logo"
               />
               <p>{generatedBlocks[1].blockName}</p>
@@ -110,14 +149,26 @@ function App() {
                     // @ts-ignore
                     images[generatedBlocks[2].image].default
                   }
-                  className="App-logo"
+                  className="App-image"
                   alt="logo"
               />
               <p>{generatedBlocks[2].blockName}</p>
               <p>{generatedBlocks[2].blockId}</p>
             </div>
+            <div className={"Image-container"}>
+              <img
+                  src={
+                    // @ts-ignore
+                    images[generatedFlower[0].image].default
+                  }
+                  className="App-image"
+                  alt="logo"
+              />
+              <p>{generatedFlower[0].blockName}</p>
+              <p>{generatedFlower[0].blockId}</p>
+            </div>
           </div>
-        <button className="Generate-button" onClick={handleClick}>Generate new block palette</button>
+        <button className="Generate-button" onClick={handleClick}>Generate new palette</button>
       </header>
     </div>
   );

@@ -14,6 +14,26 @@
     {"image": "cobblestone.png",      "blockName": "Cobblestone",       "blockId": "minecraft:cobblestone"}
   ],
   "flowers": [
-
+    {"image": "allium.png",             "blockName": "Allium",              "blockId": "minecraft:red_flower"},
+    {"image": "azure_bluet.png",        "blockName": "Azure Bluet",         "blockId": "minecraft:red_flower"},
+    {"image": "dandelion.png",          "blockName": "Dandeliion",          "blockId": "minecraft:yellow_flower"},
+    {"image": "poppy.png",              "blockName": "Poppy",               "blockId": "minecraft:red_flower"},
+    {"image": "blue_orchid.png",        "blockName": "Blue Orchid",         "blockId": "minecraft:red_flower"},
+    {"image": "red_tulip.png",          "blockName": "Red Tulip",           "blockId": "minecraft:red_flower"},
+    {"image": "orange_tulip.png",       "blockName": "Orange Tulip",        "blockId": "minecraft:red_flower"},
+    {"image": "white_tulip.png",        "blockName": "White Tulip",         "blockId": "minecraft:red_flower"},
+    {"image": "pink_tulip.png",         "blockName": "Pink Tulip",          "blockId": "minecraft:red_flower"},
+    {"image": "oxeye_daisy.png",        "blockName": "Oxeye Daisy",         "blockId": "minecraft:red_flower"},
+    {"image": "cornflower.png",         "blockName": "Cornflower",          "blockId": "minecraft:cornflower"},
+    {"image": "wither_rose.png",        "blockName": "Wither Rose",         "blockId": "minecraft:wither_rose"},
+    {"image": "brown_mushroom.png",     "blockName": "Brown Mushroom",      "blockId": "minecraft:brown_mushroom"},
+    {"image": "red_mushroom.png",       "blockName": "Red Mushroom",        "blockId": "minecraft:red_mushroom"},
+    {"image": "lily_pad.png",           "blockName": "Lily Pad",            "blockId": "minecraft:waterlily"},
+    {"image": "sunflower_front.png",    "blockName": "Sunflower",           "blockId": "minecraft:double_plant"},
+    {"image": "lilac_top.png",          "blockName": "Lilac",               "blockId": "minecraft:double_plant"},
+    {"image": "tall_grass_top.png",     "blockName": "Double Tallgrass",    "blockId": "minecraft:double_plant"},
+    {"image": "large_fern_bottom.png",  "blockName": "Large Fern",          "blockId": "minecraft:double_plant"},
+    {"image": "rose_bush_top.png",      "blockName": "Rose Bush",           "blockId": "minecraft:double_plant"},
+    {"image": "peony_top.png",          "blockName": "Peony",               "blockId": "minecraft:double_plant"}
   ]
 }
