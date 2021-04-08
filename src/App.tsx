@@ -25,7 +25,7 @@ function importAll(r: any) {
 }
 
 // Load images from public
-const imageContext = require.context("../public/Mizunos/assets/minecraft/textures/block", true, /\.png$/)
+const imageContext = require.context("../public/texture-pack", true, /\.png$/)
 const images = importAll(imageContext);
 
 /**
@@ -50,6 +50,8 @@ function App() {
         .then(function(myJson) {
           setBlockConfig(myJson.blocks)
           setFlowerConfig(myJson.flowers)
+          setTexturePack(myJson.texture_pack)
+          setLoadedData(true)
         });
   }
 
@@ -68,9 +70,14 @@ function App() {
     {image: "poppy.png",            blockName: "Poppy",             blockId: "minecraft:red_flower"}
   ])
 
+  // State to hold the name of the texture pack folder form the config JSON
+  const [texturePack, setTexturePack] = useState<string>("")
+
   // State to hold the currently displayed blocks and flower
   const [generatedBlocks, setGeneratedBlocks] = useState<Block[]>([blockConfig[0], blockConfig[1], blockConfig[2]])
   const [generatedFlower, setGeneratedFlower] = useState<Block[]>([flowerConfig[0]])
+
+  const [loadedData, setLoadedData] = useState<boolean>(false)
 
   /**
    * Click handler for the generate button
@@ -117,13 +124,15 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Palette Generator v1.0</h1>
+        {loadedData &&
+        <div>
+          <h1>Palette Generator v1.0</h1>
           <div className={"Image-set-container"}>
             <div className={"Image-container"}>
               <img
                   src={
                     // @ts-ignore
-                    images[generatedBlocks[0].image].default
+                    images[`${texturePack}/assets/minecraft/textures/block/${generatedBlocks[0].image}`].default
                   }
                   className="App-image"
                   alt="logo"
@@ -135,7 +144,7 @@ function App() {
               <img
                   src={
                     // @ts-ignore
-                    images[generatedBlocks[1].image].default
+                    images[`${texturePack}/assets/minecraft/textures/block/${generatedBlocks[1].image}`].default
                   }
                   className="App-image"
                   alt="logo"
@@ -147,7 +156,7 @@ function App() {
               <img
                   src={
                     // @ts-ignore
-                    images[generatedBlocks[2].image].default
+                    images[`${texturePack}/assets/minecraft/textures/block/${generatedBlocks[2].image}`].default
                   }
                   className="App-image"
                   alt="logo"
@@ -159,7 +168,7 @@ function App() {
               <img
                   src={
                     // @ts-ignore
-                    images[generatedFlower[0].image].default
+                    images[`${texturePack}/assets/minecraft/textures/block/${generatedFlower[0].image}`].default
                   }
                   className="App-image"
                   alt="logo"
@@ -168,7 +177,9 @@ function App() {
               <p>{generatedFlower[0].blockId}</p>
             </div>
           </div>
-        <button className="Generate-button" onClick={handleClick}>Generate new palette</button>
+          <button className="Generate-button" onClick={handleClick}>Generate new palette</button>
+        </div>
+        }
       </header>
     </div>
   );
