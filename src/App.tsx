@@ -14,21 +14,6 @@ interface Flower {
 }
 
 /**
- * Loads all dependencies from r
- * @param r RequireContext The context with which to load additional dependencies
- */
-function importAll(r: any) {
-  let imageList = {};
-  // @ts-ignore
-  r.keys().forEach((item) => { imageList[item.replace('./', '')] = r(item); });
-  return imageList;
-}
-
-// Load images from public
-const imageContext = require.context("../public/texture-pack", true, /\.png$/)
-const images = importAll(imageContext);
-
-/**
  * Component for loading the Palette Generator
  */
 function App() {
@@ -130,10 +115,7 @@ function App() {
           <div className={"Image-set-container"}>
             <div className={"Image-container"}>
               <img
-                  src={
-                    // @ts-ignore
-                    images[`${texturePack}/assets/minecraft/textures/block/${generatedBlocks[0].image}`].default
-                  }
+                  src={`${process.env.PUBLIC_URL}/texture-pack/${texturePack}/assets/minecraft/textures/block/${generatedBlocks[0].image}`}
                   className="App-image"
                   alt="logo"
               />
@@ -142,10 +124,7 @@ function App() {
             </div>
             <div className={"Image-container"}>
               <img
-                  src={
-                    // @ts-ignore
-                    images[`${texturePack}/assets/minecraft/textures/block/${generatedBlocks[1].image}`].default
-                  }
+                  src={`${process.env.PUBLIC_URL}/texture-pack/${texturePack}/assets/minecraft/textures/block/${generatedBlocks[1].image}`}
                   className="App-image"
                   alt="logo"
               />
@@ -154,10 +133,7 @@ function App() {
             </div>
             <div className={"Image-container"}>
               <img
-                  src={
-                    // @ts-ignore
-                    images[`${texturePack}/assets/minecraft/textures/block/${generatedBlocks[2].image}`].default
-                  }
+                  src={`${process.env.PUBLIC_URL}/texture-pack/${texturePack}/assets/minecraft/textures/block/${generatedBlocks[2].image}`}
                   className="App-image"
                   alt="logo"
               />
@@ -166,10 +142,7 @@ function App() {
             </div>
             <div className={"Image-container"}>
               <img
-                  src={
-                    // @ts-ignore
-                    images[`${texturePack}/assets/minecraft/textures/block/${generatedFlower[0].image}`].default
-                  }
+                  src={`${process.env.PUBLIC_URL}/texture-pack/${texturePack}/assets/minecraft/textures/block/${generatedFlower[0].image}`}
                   className="App-image"
                   alt="logo"
               />
