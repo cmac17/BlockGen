@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
+import SocialFollow from "./SocialFollow";
 
 interface Block {
   image: string,
@@ -117,7 +118,7 @@ function App() {
               <img
                   src={`${process.env.PUBLIC_URL}/texture-pack/${texturePack}/assets/minecraft/textures/block/${generatedBlocks[0].image}`}
                   className="App-image"
-                  alt="logo"
+                  alt={generatedBlocks[0].blockName}
               />
               <p>{generatedBlocks[0].blockName}</p>
               <p>{generatedBlocks[0].blockId}</p>
@@ -126,7 +127,7 @@ function App() {
               <img
                   src={`${process.env.PUBLIC_URL}/texture-pack/${texturePack}/assets/minecraft/textures/block/${generatedBlocks[1].image}`}
                   className="App-image"
-                  alt="logo"
+                  alt={generatedBlocks[1].blockName}
               />
               <p>{generatedBlocks[1].blockName}</p>
               <p>{generatedBlocks[1].blockId}</p>
@@ -135,7 +136,7 @@ function App() {
               <img
                   src={`${process.env.PUBLIC_URL}/texture-pack/${texturePack}/assets/minecraft/textures/block/${generatedBlocks[2].image}`}
                   className="App-image"
-                  alt="logo"
+                  alt={generatedBlocks[2].blockName}
               />
               <p>{generatedBlocks[2].blockName}</p>
               <p>{generatedBlocks[2].blockId}</p>
@@ -144,13 +145,14 @@ function App() {
               <img
                   src={`${process.env.PUBLIC_URL}/texture-pack/${texturePack}/assets/minecraft/textures/block/${generatedFlower[0].image}`}
                   className="App-image"
-                  alt="logo"
+                  alt={generatedFlower[0].blockName}
               />
               <p>{generatedFlower[0].blockName}</p>
               <p>{generatedFlower[0].blockId}</p>
             </div>
           </div>
           <button className="Generate-button" onClick={handleClick}>Generate new palette</button>
+          <SocialFollow/>
         </div>
         }
       </header>

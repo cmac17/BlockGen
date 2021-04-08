@@ -4,8 +4,12 @@
 
 .App-image {
   height: 20vmin;
-  pointer-events: none;
   image-rendering: pixelated;
+  transition: transform 350ms;
+}
+
+img.App-image:hover {
+  transform: scale(1.1);
 }
 
 .App-header {
@@ -45,4 +49,43 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  transition: transform 250ms;
+}
+
+button.Generate-button:hover {
+  transform: translateY(-2px);
+}
+
+.social-container {
+  padding: 25px 50px;
+}
+
+a.social {
+  margin: 1rem;
+  transition: transform 250ms;
+  display: inline-block;
+}
+
+a.social:hover {
+  transform: translateY(-2px);
+}
+
+a.youtube {
+  color: #eb3223;
+}
+
+a.twitch {
+  color: #9146ff;
+}
+
+a.twitter {
+  color: #49a1eb;
+}
+
+a.instagram {
+  color: black;
+}
+
+a.github {
+  color: black;
 }
