@@ -1,24 +1,16 @@
 .App {
   text-align: center;
-}
-
-.App-image {
-  height: 20vmin;
-  image-rendering: pixelated;
-  transition: transform 350ms;
-}
-
-img.App-image:hover {
-  transform: scale(1.1);
+  min-height: 100vh;
+  max-height: fit-content;
+  display: flex;
 }
 
 .App-header {
+  flex-grow: 2;
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-flow: column;
+  justify-content: flex-start;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -29,15 +21,35 @@ img.App-image:hover {
 
 .Image-set-container {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   justify-content: center;
-  align-content: space-evenly;
-  gap: 60px;
+  gap: 50px;
 }
 
 .Image-container {
   height: inherit;
+  flex: none;
+  width: 15%;
+  min-width: 150px;
+}
+
+.App-image {
+  width: 80%;
+  overflow: hidden;
+  image-rendering: pixelated;
+  transition: transform 350ms;
+}
+
+img.App-image:hover {
+  transform: scale(1.1);
+}
+
+.block-name {
+  overflow-wrap: break-word;
+}
+
+.block-id {
+  overflow-wrap: break-word;
 }
 
 .Generate-button {
@@ -57,7 +69,14 @@ button.Generate-button:hover {
 }
 
 .social-container {
-  padding: 25px 50px;
+  height: fit-content;
+  margin-top: auto;
+  background: #282c34;
+}
+
+.social-header {
+  color: white;
+  margin: 0.25rem;
 }
 
 a.social {
@@ -67,7 +86,7 @@ a.social {
 }
 
 a.social:hover {
-  transform: translateY(-2px);
+  transform: translateY(-5px);
 }
 
 a.youtube {

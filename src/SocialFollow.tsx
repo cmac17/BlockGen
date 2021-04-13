@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function SocialFollow() {
     return (
         <div className="social-container">
-            <h4>Created by cmac__17</h4>
+            <h4 className="social-header">Created by cmac__17</h4>
             <a href="https://www.youtube.com/channel/UC0-Oeh_PB_BXsip3pCsIm8g"
                className="youtube social">
                 <FontAwesomeIcon icon={faYoutube} size="2x" />
