@@ -113,7 +113,7 @@ function App() {
       <header className="App-header">
         {loadedData &&
         <div>
-          <h1>Palette Generator v1.0</h1>
+          <h1>Block Palette Generator</h1>
           <div className="Image-set-container">
             <div className="Image-container">
               <img
