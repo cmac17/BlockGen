@@ -2,18 +2,8 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import SocialFollow from "./SocialFollow";
 import ReactTooltip from "react-tooltip";
-
-interface Block {
-  image: string,
-  blockName: string,
-  blockId: string
-}
-
-interface Flower {
-  image: string,
-  blockName: string,
-  blockId: string
-}
+import GeneratedBlockContainer from "./GeneratedBlockContainer";
+import Block from "./Block";
 
 /**
  * Component for loading the Palette Generator
@@ -98,8 +88,8 @@ function App() {
   /**
    * Randomly determines the flower to display
    */
-  function determineFlower(): Flower[] {
-    const values: Flower[] = []
+  function determineFlower(): Block[] {
+    const values: Block[] = []
 
     // Determine the flower blocks to display
     const selectedFlower = Math.floor(Math.random() * flowerConfig.length)
@@ -114,50 +104,10 @@ function App() {
       <header className="App-header">
         <h1>Block Palette Generator</h1>
         <div className="Image-set-container">
-          <div className="Image-container">
-            <img
-                src={`${process.env.PUBLIC_URL}/texture-pack/${texturePack}/assets/minecraft/textures/block/${generatedBlocks[0].image}`}
-                className="App-image"
-                alt={generatedBlocks[0].blockName}
-            />
-            <p className="block-name">{generatedBlocks[0].blockName}</p>
-            <p className="block-id" data-tip='copy' onClick={() => {window.clientInformation.clipboard.writeText(generatedBlocks[0].blockId).then()}}>
-              {generatedBlocks[0].blockId}
-            </p>
-          </div>
-          <div className="Image-container">
-            <img
-                src={`${process.env.PUBLIC_URL}/texture-pack/${texturePack}/assets/minecraft/textures/block/${generatedBlocks[1].image}`}
-                className="App-image"
-                alt={generatedBlocks[1].blockName}
-            />
-            <p className="block-name">{generatedBlocks[1].blockName}</p>
-            <p className="block-id" data-tip='copy' onClick={() => {window.clientInformation.clipboard.writeText(generatedBlocks[1].blockId).then()}}>
-              {generatedBlocks[1].blockId}
-            </p>
-          </div>
-          <div className="Image-container">
-            <img
-                src={`${process.env.PUBLIC_URL}/texture-pack/${texturePack}/assets/minecraft/textures/block/${generatedBlocks[2].image}`}
-                className="App-image"
-                alt={generatedBlocks[2].blockName}
-            />
-            <p className="block-name">{generatedBlocks[2].blockName}</p>
-            <p className="block-id" data-tip='copy' onClick={() => {window.clientInformation.clipboard.writeText(generatedBlocks[2].blockId).then()}}>
-              {generatedBlocks[2].blockId}
-            </p>
-          </div>
-          <div className="Image-container">
-            <img
-                src={`${process.env.PUBLIC_URL}/texture-pack/${texturePack}/assets/minecraft/textures/block/${generatedFlower[0].image}`}
-                className="App-image"
-                alt={generatedFlower[0].blockName}
-            />
-            <p className="block-name">{generatedFlower[0].blockName}</p>
-            <p className="block-id" data-tip='copy' onClick={() => {window.clientInformation.clipboard.writeText(generatedFlower[0].blockId).then()}}>
-              {generatedFlower[0].blockId}
-            </p>
-          </div>
+          <GeneratedBlockContainer texturePack={texturePack} generatedBlock={generatedBlocks[0]}/>
+          <GeneratedBlockContainer texturePack={texturePack} generatedBlock={generatedBlocks[1]}/>
+          <GeneratedBlockContainer texturePack={texturePack} generatedBlock={generatedBlocks[2]}/>
+          <GeneratedBlockContainer texturePack={texturePack} generatedBlock={generatedFlower[0]}/>
           <ReactTooltip effect="solid" type="light" event="mousedown" eventOff="mouseup" delayHide={1500}>
             <p>Copied!</p>
           </ReactTooltip>
