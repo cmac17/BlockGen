@@ -1,18 +1,24 @@
 .App {
   text-align: center;
-  min-height: 100vh;
-  max-height: fit-content;
+  height: 100vh;
   display: flex;
+  flex-flow: column;
+  background: #282c34;
 }
 
 .App-header {
   flex-grow: 2;
-  background-color: #282c34;
   display: flex;
   flex-flow: column;
+  max-height: 80vh;
   justify-content: flex-start;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-footer {
+  max-height: 20vh;
+  margin-top: auto;
 }
 
 .App-link {
@@ -20,6 +26,8 @@
 }
 
 .Image-set-container {
+  overflow-y: auto;
+  max-height: 75%;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
@@ -31,13 +39,31 @@
   flex: none;
   width: 15%;
   min-width: 150px;
+  margin-top: 2%;
+}
+
+.Image-boundary {
+  width: 80%;
+  margin-left: 10%;
+  position: relative;
+}
+
+.Image-boundary::after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
 }
 
 .App-image {
-  width: 80%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
   image-rendering: pixelated;
   transition: transform 350ms;
+  object-fit: cover;
 }
 
 img.App-image:hover {
@@ -46,15 +72,21 @@ img.App-image:hover {
 
 .block-name {
   overflow-wrap: break-word;
+  font-weight: bold;
 }
 
 .block-id {
   overflow-wrap: break-word;
+  font-size: calc(10px + 1vmin);
 }
 
 .Generate-button {
   background-color: #61dafb;
   border: none;
+  margin-top: auto;
+  margin-bottom: 20px;
+  width: fit-content;
+  align-self: center;
   color: white;
   padding: 15px 32px;
   text-align: center;
@@ -70,8 +102,8 @@ button.Generate-button:hover {
 
 .social-container {
   height: fit-content;
+  overflow-x: hidden;
   margin-top: auto;
-  background: #282c34;
 }
 
 .social-header {
@@ -79,10 +111,15 @@ button.Generate-button:hover {
   margin: 0.25rem;
 }
 
+.social-link-container {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
 a.social {
   margin: 1rem;
   transition: transform 250ms;
-  display: inline-block;
 }
 
 a.social:hover {
@@ -107,4 +144,28 @@ a.instagram {
 
 a.github {
   color: black;
+}
+
+/* Width */
+::-webkit-scrollbar
+{
+  width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track
+{
+  border-radius: 10px;
+  background-color: #282c34;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  background-color: #777;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
