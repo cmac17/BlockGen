@@ -39,9 +39,9 @@ function App() {
 
   // State to hold the block and flower data from the config JSON
   const [blockConfig, setBlockConfig] = useState([
-    {image: "stone.png",            blockName: "Stone",             blockId: "minecraft:stone"},
-    {image: "granite.png",          blockName: "Granite",           blockId: "minecraft:stone"},
-    {image: "polished_granite.png", blockName: "Polished Granite",  blockId: "minecraft:stone"},
+    {image: "stone.png",            blockName: "Stone",             blockId: "minecraft:stone", filter: ""},
+    {image: "granite.png",          blockName: "Granite",           blockId: "minecraft:stone", filter: ""},
+    {image: "polished_granite.png", blockName: "Polished Granite",  blockId: "minecraft:stone", filter: ""},
   ])
   const [flowerConfig, setFlowerConfig] = useState([
     {image: "poppy.png",            blockName: "Poppy",             blockId: "minecraft:red_flower"}

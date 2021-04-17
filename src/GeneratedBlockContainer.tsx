@@ -12,7 +12,8 @@ export default function GeneratedBlockContainer({texturePack, generatedBlock}: g
             <div className="Image-boundary">
                 <img
                     src={`${process.env.PUBLIC_URL}/texture-pack/${texturePack}/assets/minecraft/textures/block/${generatedBlock.image}`}
-                    className="App-image"
+                    className={"App-image"}
+                    style={{filter: generatedBlock.filter ? generatedBlock.filter : ""}}
                     alt={generatedBlock.blockName}
                 />
             </div>

@@ -1,5 +1,6 @@
 export default interface Block {
     image: string,
     blockName: string,
-    blockId: string
+    blockId: string,
+    filter?: string
 }
